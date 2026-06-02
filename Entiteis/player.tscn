@@ -144,7 +144,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"victory",
-"speed": 10.0
+"speed": 8.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -177,10 +177,10 @@ collision_mask = 9
 script = ExtResource("1_oul6g")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=516360846]
-z_index = 2
 shape = SubResource("CapsuleShape2D_kqu6x")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1991851108]
 sprite_frames = SubResource("SpriteFrames_boad6")
 animation = &"victory"
 autoplay = "idle"
+frame_progress = 0.116939746

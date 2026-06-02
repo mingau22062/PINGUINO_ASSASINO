@@ -5,7 +5,8 @@ enum Playerstate {
 	walk,
 	jump,
 	duck,
-	fall
+	fall,
+	victory
 }
 @onready var collision: CollisionShape2D = $CollisionShape2D
 
