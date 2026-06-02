@@ -6,12 +6,16 @@ enum Playerstate {
 	jump,
 	duck
 }
+@onready var collision: CollisionShape2D = $CollisionShape2D
 
 @onready var ani: AnimatedSprite2D = $AnimatedSprite2D
 
 const SPEED = 80.0
-const JUMP_VELOCITY = -250.0
+const JUMP_VELOCITY = -300.0
 
+var jump_count = 0
+var max_jump_count = 2
+var direction = 0
 var status: Playerstate 
 
 func _ready() -> void:
@@ -43,9 +47,18 @@ func go_to_jump_state():
 	status = Playerstate.jump
 	ani.play("jump")
 	velocity.y = JUMP_VELOCITY
+	jump_count += 1 
 func go_to_duck_state():
 	status = Playerstate.duck
 	ani.play("duck")
+	collision.shape.radius = 5
+	collision.shape.height = 10
+	collision.position.y = 3
+	
+func exit_from_duck():
+	collision.shape.radius = 6
+	collision.shape.height = 16
+	collision.position.y = 0
 func idle_state():
 	move()
 	if velocity.x != 0:
@@ -71,32 +84,38 @@ func walk_state():
 		return
 func jump_state():
 	move()
+	
+	if Input.is_action_just_pressed("jump") && jump_count < max_jump_count:
+		go_to_jump_state()
+		
 	if is_on_floor():
+		jump_count = 0
 		if velocity.x == 0:
 			go_to_idle_state()
 			return
 		else:
 			go_to_walk_state()
 func duck_state():
+	update_direction()
 	if Input.is_action_just_released("duck"):
+		exit_from_duck()
 		go_to_idle_state()
 		return
 
 		
 func update_direction() -> float: 
-	var dir := Input.get_axis("move_left", "move_right")
+	direction = Input.get_axis("move_left", "move_right")
 	
-	if dir < 0:
+	if direction < 0:
 		ani.flip_h = true
-	elif dir > 0:
+	elif direction > 0:
 		ani.flip_h = false
 		
-	return dir # Retorna o valor para quem chamou a função
+	return direction # Retorna o valor para quem chamou a função
 
 func move():
-	# Armazena o valor retornado pela função em uma variável local
-	var direction = update_direction()
-	
+	update_direction()
+		
 	if direction:
 		velocity.x = direction * SPEED
 	else:
