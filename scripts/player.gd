@@ -4,7 +4,8 @@ enum Playerstate {
 	idle,
 	walk,
 	jump,
-	duck
+	duck,
+	fall
 }
 @onready var collision: CollisionShape2D = $CollisionShape2D
 
@@ -35,6 +36,8 @@ func _physics_process(delta: float) -> void:
 			jump_state()
 		Playerstate.duck:
 			duck_state()
+		Playerstate.fall:
+			fall_state()
 	move_and_slide()
 
 func go_to_idle_state():
@@ -54,7 +57,9 @@ func go_to_duck_state():
 	collision.shape.radius = 5
 	collision.shape.height = 10
 	collision.position.y = 3
-	
+func go_to_fall_state():
+	status = Playerstate.fall
+	ani.play("fall")
 func exit_from_duck():
 	collision.shape.radius = 6
 	collision.shape.height = 16
@@ -87,22 +92,27 @@ func jump_state():
 	
 	if Input.is_action_just_pressed("jump") && jump_count < max_jump_count:
 		go_to_jump_state()
-		
-	if is_on_floor():
-		jump_count = 0
-		if velocity.x == 0:
-			go_to_idle_state()
-			return
-		else:
-			go_to_walk_state()
+		return
+	if velocity.y > 0:
+		go_to_fall_state()
+		return
 func duck_state():
 	update_direction()
 	if Input.is_action_just_released("duck"):
 		exit_from_duck()
 		go_to_idle_state()
 		return
-
-		
+func fall_state():
+		move()
+		if Input.is_action_just_pressed("jump")&& jump_count < 2:
+			go_to_jump_state()
+		if is_on_floor():
+			jump_count = 0
+			if velocity.x == 0:
+				go_to_idle_state()
+			else:
+				go_to_walk_state()
+			return
 func update_direction() -> float: 
 	direction = Input.get_axis("move_left", "move_right")
 	
