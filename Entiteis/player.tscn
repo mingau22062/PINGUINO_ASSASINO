@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bcfvd3dyljbfs" path="res://sprites/1 - Penguin/Waddling (16 x 16).png" id="3_g1dw6"]
 [ext_resource type="Texture2D" uid="uid://cyyq64gd16obq" path="res://sprites/1 - Penguin/Falling (16 x 16).png" id="3_lfftr"]
 [ext_resource type="Texture2D" uid="uid://cvtj7kib3j4ky" path="res://sprites/1 - Penguin/Jump (16 x 16).png" id="3_yw30f"]
+[ext_resource type="Texture2D" uid="uid://c20ob3r5tnmd4" path="res://sprites/1 - Penguin/Victory_Dance (16 x 16).png" id="6_gqjah"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kqu6x"]
 radius = 6.0
@@ -34,6 +35,26 @@ region = Rect2(64, 0, 16, 16)
 [sub_resource type="AtlasTexture" id="AtlasTexture_yllr7"]
 atlas = ExtResource("3_yw30f")
 region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xb0d8"]
+atlas = ExtResource("6_gqjah")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nypjp"]
+atlas = ExtResource("6_gqjah")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i5uik"]
+atlas = ExtResource("6_gqjah")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t4rlp"]
+atlas = ExtResource("6_gqjah")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_puk5s"]
+atlas = ExtResource("6_gqjah")
+region = Rect2(64, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_boad6"]
 atlas = ExtResource("3_g1dw6")
@@ -107,6 +128,26 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_xb0d8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nypjp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i5uik")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t4rlp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_puk5s")
+}],
+"loop": true,
+"name": &"victory",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_boad6")
 }, {
 "duration": 1.0,
@@ -141,5 +182,5 @@ shape = SubResource("CapsuleShape2D_kqu6x")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1991851108]
 sprite_frames = SubResource("SpriteFrames_boad6")
-animation = &"fall"
+animation = &"victory"
 autoplay = "idle"

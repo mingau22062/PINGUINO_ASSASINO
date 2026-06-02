@@ -87,10 +87,15 @@ func walk_state():
 	if Input.is_action_just_pressed("jump"):
 		go_to_jump_state()
 		return
+		
+	if !is_on_floor():
+		jump_count += 1
+		go_to_fall_state()
+		return
 func jump_state():
 	move()
 	
-	if Input.is_action_just_pressed("jump") && jump_count < max_jump_count:
+	if Input.is_action_just_pressed("jump") && can_jump():
 		go_to_jump_state()
 		return
 	if velocity.y > 0:
@@ -104,8 +109,9 @@ func duck_state():
 		return
 func fall_state():
 		move()
-		if Input.is_action_just_pressed("jump")&& jump_count < 2:
+		if Input.is_action_just_pressed("jump")&& can_jump():
 			go_to_jump_state()
+			return
 		if is_on_floor():
 			jump_count = 0
 			if velocity.x == 0:
@@ -130,3 +136,5 @@ func move():
 		velocity.x = direction * SPEED
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
+func can_jump() -> bool:
+	return jump_count < max_jump_count
