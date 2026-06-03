@@ -36,6 +36,11 @@ limit_right = 750
 
 [node name="player" parent="." unique_id=1493939589 instance=ExtResource("2_ry6l7")]
 position = Vector2(136, 108)
+max_speed = 150.0
+aceleration = 200
+deceleratio = 200
+sliding_decelatio = null
+max_jump_count = null
 
 [node name="back-gound" type="Node" parent="." unique_id=1117380609]
 

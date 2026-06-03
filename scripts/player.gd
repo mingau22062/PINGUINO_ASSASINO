@@ -6,20 +6,32 @@ enum Playerstate {
 	jump,
 	duck,
 	fall,
-	victory
+	victory,
+	sliding
 }
 @onready var collision: CollisionShape2D = $CollisionShape2D
 
 @onready var ani: AnimatedSprite2D = $AnimatedSprite2D
 
-const SPEED = 80.0
+@export var max_speed = 180.0
+@export var aceleration = 100
+@export var deceleratio = 100
+@export var sliding_decelatio = 150
 const JUMP_VELOCITY = -300.0
 
+
 var jump_count = 0
-var max_jump_count = 2
+@export var max_jump_count = 2
 var direction = 0
 var status: Playerstate 
 
+func move(delta):
+	update_direction()
+		
+	if direction:
+		velocity.x = move_toward(velocity.x,direction * max_speed, aceleration * delta)
+	else:
+		velocity.x = move_toward(velocity.x, 0, deceleratio)
 func _ready() -> void:
 	go_to_idle_state()
 
@@ -30,15 +42,17 @@ func _physics_process(delta: float) -> void:
 	
 	match  status:
 		Playerstate.idle:
-			idle_state()
+			idle_state(delta)
 		Playerstate.walk:
-			walk_state()
+			walk_state(delta)
 		Playerstate.jump:
-			jump_state()
+			jump_state(delta)
 		Playerstate.duck:
-			duck_state()
+			duck_state(delta)
 		Playerstate.fall:
-			fall_state()
+			fall_state(delta)
+		Playerstate.sliding:
+			sliding_state(delta)
 	move_and_slide()
 
 func go_to_idle_state():
@@ -55,18 +69,22 @@ func go_to_jump_state():
 func go_to_duck_state():
 	status = Playerstate.duck
 	ani.play("duck")
-	collision.shape.radius = 5
-	collision.shape.height = 10
-	collision.position.y = 3
+	
 func go_to_fall_state():
 	status = Playerstate.fall
 	ani.play("fall")
+	small_colision()
 func exit_from_duck():
-	collision.shape.radius = 6
-	collision.shape.height = 16
-	collision.position.y = 0
-func idle_state():
-	move()
+	exit_small_colision()
+func go_to_sliding_state():
+	status = Playerstate.sliding
+	ani.play("sliding")
+	small_colision()
+	
+func exit_to_sliding():
+	exit_small_colision()
+func idle_state(delta):
+	move(delta)
 	if velocity.x != 0:
 		go_to_walk_state()
 		return
@@ -79,8 +97,8 @@ func idle_state():
 		go_to_duck_state()
 		return
 		
-func walk_state():
-	move()
+func walk_state(delta):
+	move(delta)
 	if velocity.x == 0:
 		go_to_idle_state()
 		return
@@ -93,8 +111,11 @@ func walk_state():
 		jump_count += 1
 		go_to_fall_state()
 		return
-func jump_state():
-	move()
+	if Input.is_action_just_pressed("duck"d):
+		go_to_sliding_state()
+		return
+func jump_state(delta):
+	move(delta)
 	
 	if Input.is_action_just_pressed("jump") && can_jump():
 		go_to_jump_state()
@@ -102,14 +123,14 @@ func jump_state():
 	if velocity.y > 0:
 		go_to_fall_state()
 		return
-func duck_state():
+func duck_state(_delta):
 	update_direction()
 	if Input.is_action_just_released("duck"):
 		exit_from_duck()
 		go_to_idle_state()
 		return
-func fall_state():
-		move()
+func fall_state(delta):
+		move(delta)
 		if Input.is_action_just_pressed("jump")&& can_jump():
 			go_to_jump_state()
 			return
@@ -120,6 +141,16 @@ func fall_state():
 			else:
 				go_to_walk_state()
 			return
+func sliding_state(delta):
+	velocity.x = move_toward(velocity.x , 0, sliding_decelatio * delta)
+		
+	if Input.is_action_just_released("duck"):
+		exit_to_sliding()
+		go_to_walk_state()
+		return
+	if velocity.x == 0:
+		exit_to_sliding()
+		go_to_duck_state()
 func update_direction() -> float: 
 	direction = Input.get_axis("move_left", "move_right")
 	
@@ -130,12 +161,14 @@ func update_direction() -> float:
 		
 	return direction # Retorna o valor para quem chamou a função
 
-func move():
-	update_direction()
-		
-	if direction:
-		velocity.x = direction * SPEED
-	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
+
 func can_jump() -> bool:
 	return jump_count < max_jump_count
+func small_colision():
+	collision.shape.radius = 5
+	collision.shape.height = 10
+	collision.position.y = 3
+func exit_small_colision():
+	collision.shape.radius = 6
+	collision.shape.height = 16
+	collision.position.y = 0
