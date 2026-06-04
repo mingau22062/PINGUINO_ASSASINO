@@ -29,6 +29,9 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t8vtq"]
 size = Vector2(9.75, 232)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ei81g"]
+size = Vector2(20, 203)
+
 [node name="tropic" type="Node2D" unique_id=990487683]
 metadata/_edit_vertical_guides_ = [750.0]
 
@@ -123,5 +126,13 @@ position = Vector2(584, 164)
 [node name="skeletron3" parent="enemies" unique_id=1130122891 instance=ExtResource("11_t8vtq")]
 z_index = 1
 position = Vector2(234, 147)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=556771950]
+collision_mask = 6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=203293875]
+position = Vector2(-6, 90)
+shape = SubResource("RectangleShape2D_ei81g")
+debug_color = Color(0.76862746, 0.14901961, 0.69411767, 0.41960785)
 
 [editable path="LevelEnd"]

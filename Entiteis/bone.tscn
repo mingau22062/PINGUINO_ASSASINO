@@ -53,4 +53,4 @@ debug_color = Color(0.15294118, 0.45490196, 0.30588236, 0.45882353)
 sprite_frames = SubResource("SpriteFrames_xt3v8")
 animation = &"bone"
 autoplay = "bone"
-frame_progress = 0.66879666
+frame_progress = 0.92991394
