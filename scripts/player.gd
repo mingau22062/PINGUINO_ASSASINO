@@ -7,15 +7,16 @@ enum Playerstate {
 	duck,
 	fall,
 	victory,
-	sliding
+	sliding,
+	dead
 }
 @onready var collision: CollisionShape2D = $CollisionShape2D
-
 @onready var ani: AnimatedSprite2D = $AnimatedSprite2D
+@onready var reloadtime: Timer = $reloadtime
 
-@export var max_speed = 180.0
-@export var aceleration = 100
-@export var deceleratio = 100
+@export var max_speed = 100.0
+@export var aceleration = 150
+@export var deceleratio = 150
 @export var sliding_decelatio = 150
 const JUMP_VELOCITY = -300.0
 
@@ -53,6 +54,8 @@ func _physics_process(delta: float) -> void:
 			fall_state(delta)
 		Playerstate.sliding:
 			sliding_state(delta)
+		Playerstate.dead:
+			dead_state(delta)
 	move_and_slide()
 
 func go_to_idle_state():
@@ -83,6 +86,12 @@ func go_to_sliding_state():
 	
 func exit_to_sliding():
 	exit_small_colision()
+	
+func go_to_dead_state():
+	status = Playerstate.dead
+	ani.play("dead")
+	velocity =  Vector2.ZERO
+	reloadtime.start()
 func idle_state(delta):
 	move(delta)
 	if velocity.x != 0:
@@ -111,7 +120,7 @@ func walk_state(delta):
 		jump_count += 1
 		go_to_fall_state()
 		return
-	if Input.is_action_just_pressed("duck"d):
+	if Input.is_action_just_pressed("duck"):
 		go_to_sliding_state()
 		return
 func jump_state(delta):
@@ -151,6 +160,9 @@ func sliding_state(delta):
 	if velocity.x == 0:
 		exit_to_sliding()
 		go_to_duck_state()
+		
+func dead_state(_delta):
+	pass
 func update_direction() -> float: 
 	direction = Input.get_axis("move_left", "move_right")
 	
@@ -172,3 +184,18 @@ func exit_small_colision():
 	collision.shape.radius = 6
 	collision.shape.height = 16
 	collision.position.y = 0
+
+
+func _on_hitbox_area_entered(area: Area2D) -> void:
+	if velocity.y > 0:
+		area.get_parent().take_damage()
+		go_to_jump_state()
+		jump_count = 1
+
+	else:
+		if status != Playerstate.dead:
+			go_to_dead_state()
+
+
+func _on_reloadtime_timeout() -> void:
+		get_tree().reload_current_scene()

@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://blphw60fq8q7e" path="res://sprites/Seasonal Tilesets/Seasonal Tilesets/3 - Tropics/Background parts/1 - Waters_version_1.png" id="8_t8vtq"]
 [ext_resource type="PackedScene" uid="uid://na7yjo5ysnrr" path="res://Entiteis/camera.tscn" id="9_34ia6"]
 [ext_resource type="PackedScene" uid="uid://coqm2w0r5yype" path="res://Entiteis/level_end.tscn" id="10_d18o5"]
+[ext_resource type="PackedScene" uid="uid://demg4kg3cwhom" path="res://Entiteis/skeletron.tscn" id="11_t8vtq"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_7xb8y"]
 animations = [{
@@ -35,12 +36,9 @@ metadata/_edit_vertical_guides_ = [750.0]
 limit_right = 750
 
 [node name="player" parent="." unique_id=1493939589 instance=ExtResource("2_ry6l7")]
-position = Vector2(136, 108)
-max_speed = 150.0
+position = Vector2(114, 145)
 aceleration = 200
 deceleratio = 200
-sliding_decelatio = null
-max_jump_count = null
 
 [node name="back-gound" type="Node" parent="." unique_id=1117380609]
 
@@ -111,5 +109,19 @@ next_level = "forest"
 position = Vector2(173, 36)
 shape = SubResource("RectangleShape2D_t8vtq")
 debug_color = Color(0.73050857, 0.33956447, 0.15644082, 0.41960785)
+
+[node name="enemies" type="Node" parent="." unique_id=270607116]
+
+[node name="skeletron" parent="enemies" unique_id=1058257826 instance=ExtResource("11_t8vtq")]
+z_index = 1
+position = Vector2(370, 117)
+
+[node name="skeletron2" parent="enemies" unique_id=87212745 instance=ExtResource("11_t8vtq")]
+z_index = 1
+position = Vector2(584, 164)
+
+[node name="skeletron3" parent="enemies" unique_id=1130122891 instance=ExtResource("11_t8vtq")]
+z_index = 1
+position = Vector2(234, 147)
 
 [editable path="LevelEnd"]

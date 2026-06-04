@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="PINGUIM"
-run/main_scene="uid://cika74iy7b7tb"
+run/main_scene="uid://dhcnwre4tcajd"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
