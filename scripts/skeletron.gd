@@ -3,7 +3,6 @@ extends CharacterBody2D
 enum skeletronState {
 	walk,
 	dead,
-	spawn,
 	attack
 }
 @onready var ani: AnimatedSprite2D = $AnimatedSprite2D
@@ -11,15 +10,16 @@ enum skeletronState {
 @onready var walldetector: RayCast2D = $walldetector
 @onready var grounddetctor: RayCast2D = $grounddetctor
 @onready var player_detector: RayCast2D = $playerDetector
+@onready var bone_start: Node2D = $boneStart
 const BONE = preload("uid://ck8vii4fsih1k")
 
 var direction = 1
-
-const SPEED = 30.0
+var can_shot = true
+const SPEED = 25.0
 const JUMP_VELOCITY = -400.0
 
 var status : skeletronState
-var can_shot = true
+
 func _ready() -> void:
 	go_to_walk_state()
 	return
@@ -41,17 +41,21 @@ func _physics_process(delta: float) -> void:
 func go_to_walk_state():
 	status = skeletronState.walk
 	ani.play("walk")
-func go_to_dead_state():
-	status = skeletronState.dead
-	ani.play("dead")
-	hitbox.process_mode = Node.PROCESS_MODE_DISABLED
-	velocity = Vector2.ZERO
 	
 func go_to_attack_state():
 	status = skeletronState.attack
 	ani.play("attack")
 	velocity = Vector2.ZERO
 	can_shot = true
+	
+func go_to_dead_state():
+	status = skeletronState.dead
+	ani.play("dead")
+	hitbox.process_mode = Node.PROCESS_MODE_DISABLED
+	velocity = Vector2.ZERO
+	
+
+	
 func walk_state(_delta):
 	velocity.x = SPEED * direction
 	
@@ -67,18 +71,18 @@ func walk_state(_delta):
 func dead_state(_delta):
 	pass
 func attack_state(_delta):
-	if ani.frame == 2 && can_shot:
+	if ani.frame == 0:
+		can_shot = true
+
+	if ani.frame == 2 and can_shot:
 		shot_bone()
 		can_shot = false
+		
 func take_damage():
 	go_to_dead_state()
 func shot_bone():
 	var new_bone = BONE.instantiate()
 	add_sibling(new_bone)
-	new_bone.position = self.position
+	new_bone.position = bone_start.global_position
 	new_bone.set_direction(direction)
 		
-func _on_animated_sprite_2d_animation_finished() -> void:
-	if ani.animation == "attack":
-		go_to_walk_state()
-		return
