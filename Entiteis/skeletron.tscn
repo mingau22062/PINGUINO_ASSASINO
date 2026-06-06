@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://di6hg6tit5ivm" path="res://scripts/skeletron.gd" id="1_4bvmm"]
 [ext_resource type="Texture2D" uid="uid://dix40uqlmhgoo" path="res://sprites/3 - Skeleton/Bone_Toss (32 x 32).png" id="2_7x0b6"]
 [ext_resource type="Texture2D" uid="uid://d25ae47s6mkau" path="res://sprites/3 - Skeleton/Crumbling_Into_Bone_Pile (32 x 32).png" id="2_y68a6"]
-[ext_resource type="Texture2D" uid="uid://cd81tgyrtl21e" path="res://sprites/3 - Skeleton/Bone_Pile_Wakeup (32 x 32).png" id="3_7x0b6"]
 [ext_resource type="Texture2D" uid="uid://bj2ny0pqg38kg" path="res://sprites/3 - Skeleton/Limping_Movement (32 x 32).png" id="4_n4kc4"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4bvmm"]
@@ -58,34 +57,6 @@ region = Rect2(160, 0, 32, 32)
 atlas = ExtResource("2_y68a6")
 region = Rect2(192, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ay7vt"]
-atlas = ExtResource("3_7x0b6")
-region = Rect2(0, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ub8rx"]
-atlas = ExtResource("3_7x0b6")
-region = Rect2(32, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_hgy8b"]
-atlas = ExtResource("3_7x0b6")
-region = Rect2(64, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_us8ck"]
-atlas = ExtResource("3_7x0b6")
-region = Rect2(96, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_a5q16"]
-atlas = ExtResource("3_7x0b6")
-region = Rect2(128, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_mu1vd"]
-atlas = ExtResource("3_7x0b6")
-region = Rect2(160, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_yv6wk"]
-atlas = ExtResource("3_7x0b6")
-region = Rect2(192, 0, 32, 32)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_wojhq"]
 atlas = ExtResource("4_n4kc4")
 region = Rect2(0, 0, 32, 32)
@@ -128,7 +99,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_7su4r")
 }],
-"loop": true,
+"loop": false,
 "name": &"attack",
 "speed": 6.0
 }, {
@@ -156,32 +127,6 @@ animations = [{
 }],
 "loop": false,
 "name": &"dead",
-"speed": 8.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ay7vt")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ub8rx")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_hgy8b")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_us8ck")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_a5q16")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_mu1vd")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_yv6wk")
-}],
-"loop": true,
-"name": &"spawn",
 "speed": 8.0
 }, {
 "frames": [{
@@ -223,8 +168,6 @@ shape = SubResource("CapsuleShape2D_4bvmm")
 sprite_frames = SubResource("SpriteFrames_84epl")
 animation = &"attack"
 autoplay = "walk"
-frame = 2
-frame_progress = 0.91092414
 
 [node name="hitbox" type="Area2D" parent="." unique_id=1748541221]
 collision_layer = 4
