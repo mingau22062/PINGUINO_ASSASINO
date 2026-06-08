@@ -187,15 +187,20 @@ func exit_small_colision():
 
 
 func _on_hitbox_area_entered(area: Area2D) -> void:
+	if area.is_in_group("enemies"):
+		hit_enemy(area)
+	elif area.is_in_group("areaLetal"):
+		hit_area_letal()
+func hit_enemy(area: Area2D):
 	if velocity.y > 0:
 		area.get_parent().take_damage()
 		go_to_jump_state()
 		jump_count = 1
-
 	else:
 		if status != Playerstate.dead:
 			go_to_dead_state()
-
+func hit_area_letal():
+	go_to_dead_state()
 
 func _on_reloadtime_timeout() -> void:
 		get_tree().reload_current_scene()
