@@ -67,7 +67,7 @@ func walk_state(_delta):
 		direction *= -1
 	if player_detector.is_colliding():
 		go_to_attack_state()
-		return
+	
 func dead_state(_delta):
 	pass
 func attack_state(_delta):
@@ -77,7 +77,7 @@ func attack_state(_delta):
 	if ani.frame == 2 and can_shot:
 		shot_bone()
 		can_shot = false
-		
+		return
 func take_damage():
 	go_to_dead_state()
 func shot_bone():
@@ -86,3 +86,9 @@ func shot_bone():
 	new_bone.position = bone_start.global_position
 	new_bone.set_direction(direction)
 		
+
+
+func _on_animated_sprite_2d_animation_finished() -> void:
+	if ani.animation == "attack":
+		go_to_walk_state()
+		return

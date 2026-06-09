@@ -12,6 +12,7 @@ enum Playerstate {
 }
 @onready var collision: CollisionShape2D = $CollisionShape2D
 @onready var ani: AnimatedSprite2D = $AnimatedSprite2D
+@onready var hitbox_collision: CollisionShape2D = $hitbox/CollisionShape2D
 @onready var reloadtime: Timer = $reloadtime
 
 @export var max_speed = 100.0
@@ -88,10 +89,13 @@ func exit_to_sliding():
 	exit_small_colision()
 	
 func go_to_dead_state():
+	if status == Playerstate.dead:
+		return
 	status = Playerstate.dead
 	ani.play("dead")
-	velocity =  Vector2.ZERO
+	velocity.x = 0 
 	reloadtime.start()
+	
 func idle_state(delta):
 	move(delta)
 	if velocity.x != 0:
@@ -156,6 +160,7 @@ func sliding_state(delta):
 	if Input.is_action_just_released("duck"):
 		exit_to_sliding()
 		go_to_walk_state()
+		
 		return
 	if velocity.x == 0:
 		exit_to_sliding()
@@ -180,22 +185,35 @@ func small_colision():
 	collision.shape.radius = 5
 	collision.shape.height = 10
 	collision.position.y = 3
+	
+	hitbox_collision.shape.size.y = 10
+	hitbox_collision.position.y = 3
 func exit_small_colision():
 	collision.shape.radius = 6
 	collision.shape.height = 16
 	collision.position.y = 0
 
-
+	hitbox_collision.shape.size.y = 15
+	hitbox_collision.position.y = 0.5
 func _on_hitbox_area_entered(area: Area2D) -> void:
+	if area.is_in_group("enemies"):
+		hit_enemy(area)
+	elif area.is_in_group("areaLetal"):
+		hit_area_letal()
+func hit_enemy(area: Area2D):
 	if velocity.y > 0:
 		area.get_parent().take_damage()
 		go_to_jump_state()
 		jump_count = 1
-
 	else:
-		if status != Playerstate.dead:
+		
 			go_to_dead_state()
-
+			
+func _on_hitbox_body_entered(body: Node2D) -> void:
+	if body.is_in_group("areaLetal"):
+		go_to_dead_state()
+func hit_area_letal():
+	go_to_dead_state()
 
 func _on_reloadtime_timeout() -> void:
 		get_tree().reload_current_scene()
