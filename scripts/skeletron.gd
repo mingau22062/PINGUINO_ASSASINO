@@ -66,7 +66,6 @@ func walk_state(_delta):
 		scale.x *= -1
 		direction *= -1
 	if player_detector.is_colliding():
-
 		go_to_attack_state()
 	
 func dead_state(_delta):

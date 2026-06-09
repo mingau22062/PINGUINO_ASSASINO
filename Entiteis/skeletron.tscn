@@ -156,7 +156,7 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4bvmm"]
 size = Vector2(12, 26)
 
-[node name="skeletron" type="CharacterBody2D" unique_id=1058257826]
+[node name="skeletron" type="CharacterBody2D" unique_id=1058257826 groups=["enemies"]]
 collision_layer = 4
 script = ExtResource("1_4bvmm")
 
@@ -169,7 +169,7 @@ sprite_frames = SubResource("SpriteFrames_84epl")
 animation = &"attack"
 autoplay = "walk"
 
-[node name="hitbox" type="Area2D" parent="." unique_id=1748541221]
+[node name="hitbox" type="Area2D" parent="." unique_id=1748541221 groups=["enemies"]]
 collision_layer = 4
 collision_mask = 2
 
