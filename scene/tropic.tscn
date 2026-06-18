@@ -21,7 +21,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("7_d18o5")
 }],
-"loop": true,
+"loop": 1,
 "name": &"default",
 "speed": 2.0
 }]
@@ -106,7 +106,7 @@ tile_set = ExtResource("3_ry6l7")
 
 [node name="LevelEnd" parent="." unique_id=1538243209 instance=ExtResource("10_d18o5")]
 position = Vector2(585, 41)
-next_level = "forest"
+next_level = "foest_laranja"
 
 [node name="CollisionShape2D" parent="LevelEnd" index="0" unique_id=355272671]
 position = Vector2(173, 36)

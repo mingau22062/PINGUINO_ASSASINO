@@ -1,0 +1,125 @@
+[gd_scene format=4 uid="uid://vpm32raphpgp"]
+
+[ext_resource type="TileSet" uid="uid://d0ai15sva6ngj" path="res://tiles/terrain.tres" id="1_anktc"]
+[ext_resource type="PackedScene" uid="uid://na7yjo5ysnrr" path="res://Entiteis/camera.tscn" id="1_byo6e"]
+[ext_resource type="PackedScene" uid="uid://de2vgp2kdtufe" path="res://Entiteis/player.tscn" id="2_y55rp"]
+[ext_resource type="PackedScene" uid="uid://demg4kg3cwhom" path="res://Entiteis/skeletron.tscn" id="3_fe4xb"]
+[ext_resource type="Texture2D" uid="uid://clqaefttkb8us" path="res://sprites/Seasonal Tilesets/Seasonal Tilesets/2 - Autumn Forest/Background parts/6 - Distant_trees.png" id="4_fe4xb"]
+[ext_resource type="Texture2D" uid="uid://ca4d647b4rn5g" path="res://sprites/Seasonal Tilesets/Seasonal Tilesets/2 - Autumn Forest/Background parts/5 - Tree_row_BG_2.png" id="6_kctxe"]
+[ext_resource type="Texture2D" uid="uid://8pikedsipwao" path="res://sprites/Seasonal Tilesets/Seasonal Tilesets/2 - Autumn Forest/Background parts/4 - Tree_row_BG_1.png" id="7_ikgqu"]
+[ext_resource type="Texture2D" uid="uid://cmfg4jwdkx7jb" path="res://sprites/Seasonal Tilesets/Seasonal Tilesets/2 - Autumn Forest/Background parts/3 - Bottom_leaf_piles.png" id="8_8bbi1"]
+[ext_resource type="Texture2D" uid="uid://fry1kw00u1bt" path="res://sprites/Seasonal Tilesets/Seasonal Tilesets/2 - Autumn Forest/Background parts/2 - Trees.png" id="9_wkmpp"]
+[ext_resource type="Texture2D" uid="uid://bqbg86avnkpkq" path="res://sprites/Seasonal Tilesets/Seasonal Tilesets/2 - Autumn Forest/Background parts/1 - Leaf_top.png" id="10_348rm"]
+[ext_resource type="PackedScene" uid="uid://coqm2w0r5yype" path="res://Entiteis/level_end.tscn" id="11_ikgqu"]
+[ext_resource type="TileSet" uid="uid://bn0y66nx80cag" path="res://tiles/decoration.tres" id="12_8bbi1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7j8aj"]
+size = Vector2(20, 211)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o0oqy"]
+size = Vector2(20, 173)
+
+[node name="foest laranja" type="Node2D" unique_id=1220127731]
+
+[node name="Camera" parent="." unique_id=1268751885 instance=ExtResource("1_byo6e")]
+limit_top = 0
+
+[node name="player" parent="." unique_id=1493939589 instance=ExtResource("2_y55rp")]
+position = Vector2(47, 61)
+
+[node name="skeletron" parent="." unique_id=1058257826 instance=ExtResource("3_fe4xb")]
+position = Vector2(268, 120)
+
+[node name="skeletron2" parent="." unique_id=1986456815 instance=ExtResource("3_fe4xb")]
+position = Vector2(402, 122)
+
+[node name="back-gorund" type="Node" parent="." unique_id=285692382]
+
+[node name="camada 6" type="Parallax2D" parent="back-gorund" unique_id=1944738637]
+scroll_scale = Vector2(0.1, 0.1)
+repeat_size = Vector2(288, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="back-gorund/camada 6" unique_id=698736490]
+z_index = -5
+texture_repeat = 1
+texture = ExtResource("4_fe4xb")
+centered = false
+
+[node name="camada 5" type="Parallax2D" parent="back-gorund" unique_id=1319038779]
+scroll_scale = Vector2(0.2, 0.2)
+repeat_size = Vector2(288, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="back-gorund/camada 5" unique_id=1543675567]
+z_index = -5
+texture_repeat = 1
+texture = ExtResource("6_kctxe")
+centered = false
+
+[node name="camada 4" type="Parallax2D" parent="back-gorund" unique_id=713484453]
+scroll_scale = Vector2(0.3, 0.3)
+repeat_size = Vector2(288, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="back-gorund/camada 4" unique_id=776170941]
+z_index = -5
+texture_repeat = 1
+texture = ExtResource("7_ikgqu")
+centered = false
+
+[node name="camada 3" type="Parallax2D" parent="back-gorund" unique_id=338529101]
+scroll_scale = Vector2(0.4, 0.4)
+repeat_size = Vector2(288, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="back-gorund/camada 3" unique_id=707019101]
+z_index = -5
+texture_repeat = 1
+texture = ExtResource("8_8bbi1")
+centered = false
+
+[node name="camada 2" type="Parallax2D" parent="back-gorund" unique_id=884980282]
+scroll_scale = Vector2(0.5, 0.5)
+repeat_size = Vector2(288, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="back-gorund/camada 2" unique_id=1491015414]
+z_index = -5
+texture_repeat = 1
+texture = ExtResource("9_wkmpp")
+centered = false
+
+[node name="camada 1" type="Parallax2D" parent="back-gorund" unique_id=714899613]
+scroll_scale = Vector2(1.2, 1.2)
+repeat_size = Vector2(288, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="back-gorund/camada 1" unique_id=984738365]
+z_index = -5
+texture_repeat = 1
+texture = ExtResource("10_348rm")
+centered = false
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1197232364]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=21927506]
+visibility_layer = 2
+position = Vector2(0, 95.5)
+shape = SubResource("RectangleShape2D_7j8aj")
+debug_color = Color(0.6070442, 0.51011384, 0.4977237, 0.41960785)
+
+[node name="LevelEnd" parent="." unique_id=1538243209 instance=ExtResource("11_ikgqu")]
+position = Vector2(582, 120)
+next_level = "grassland"
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="LevelEnd" unique_id=1658967035]
+position = Vector2(4, -17)
+shape = SubResource("RectangleShape2D_o0oqy")
+
+[node name="terreno" type="Node" parent="." unique_id=463658141]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="terreno" unique_id=1697119564]
+position = Vector2(-2, -22)
+tile_map_data = PackedByteArray("AAAAAA0AAgABAAMAAAABAA0AAgACAAMAAAACAA0AAgAGAAMAAAADAA0AAgAGAAMAAAAEAA0AAgAGAAMAAAAFAA0AAgAGAAMAAAAGAA0AAgAGAAMAAAAHAA0AAgAGAAMAAAAIAA0AAgAGAAMAAAAJAA0AAgAGAAMAAAAKAA0AAgAGAAMAAAALAA0AAgAGAAMAAAAMAA0AAgAGAAMAAAANAA0AAgAGAAMAAAAOAA0AAgAGAAMAAAAPAA0AAgAGAAMAAAAQAA0AAgAGAAMAAAARAA0AAgAGAAMAAAASAA0AAgAGAAMAAAATAA0AAgAGAAMAAAAUAA0AAgAGAAMAAAAVAA0AAgAGAAMAAAAWAA0AAgAGAAMAAAAXAA0AAgAGAAMAAAAYAA0AAgAGAAMAAAAZAA0AAgAGAAMAAAAaAA0AAgAGAAMAAAAbAA0AAgAGAAMAAAAcAA0AAgAGAAMAAAAdAA0AAgAGAAMAAAAeAA0AAgAGAAMAAAAfAA0AAgAGAAMAAAAgAA0AAgAGAAMAAAAhAA0AAgAGAAMAAAAiAA0AAgAGAAMAAAAjAA0AAgAGAAMAAAAkAA0AAgAGAAMAAAAlAA0AAgAGAAMAAAAmAA0AAgAGAAMAAAAnAA0AAgAGAAMAAAAoAA0AAgAGAAMAAAApAA0AAgAGAAMAAAAqAA0AAgAGAAMAAAArAA0AAgAGAAMAAAAsAA0AAgAGAAMAAAAtAA0AAgAGAAMAAAAuAA0AAgAGAAMAAAAvAA0AAgAHAAMAAAAvAA4AAgAHAAQAAAAuAA4AAgAEAAYAAAAtAA4AAgAEAAYAAAAsAA4AAgAEAAYAAAArAA4AAgAEAAYAAAAqAA4AAgAEAAYAAAApAA4AAgAEAAYAAAAoAA4AAgAEAAYAAAAnAA4AAgAEAAYAAAAmAA4AAgAEAAYAAAAlAA4AAgAEAAYAAAAkAA4AAgAEAAYAAAAjAA4AAgAEAAYAAAAiAA4AAgAEAAYAAAAhAA4AAgAEAAYAAAAgAA4AAgAEAAYAAAAfAA4AAgAEAAYAAAAeAA4AAgAEAAYAAAAdAA4AAgAEAAYAAAAcAA4AAgAEAAYAAAAbAA4AAgAEAAYAAAAaAA4AAgAEAAYAAAAZAA4AAgAEAAYAAAAYAA4AAgAEAAYAAAAXAA4AAgAEAAYAAAAWAA4AAgAEAAYAAAAVAA4AAgAEAAYAAAAUAA4AAgAEAAYAAAATAA4AAgAEAAYAAAASAA4AAgAEAAYAAAARAA4AAgAEAAYAAAAQAA4AAgAEAAYAAAAPAA4AAgAEAAYAAAAOAA4AAgAEAAYAAAANAA4AAgAEAAYAAAAMAA4AAgAEAAYAAAALAA4AAgAEAAYAAAAKAA4AAgAEAAYAAAAJAA4AAgAEAAYAAAAIAA4AAgAEAAYAAAAHAA4AAgAEAAYAAAAGAA4AAgAEAAYAAAAFAA4AAgAEAAYAAAAEAA4AAgAEAAYAAAADAA4AAgAEAAYAAAACAA4AAgAEAAYAAAABAA4AAgAEAAYAAAAAAA4AAgADAAYAAAAEAAsAAgADAAEAAAAEAAwAAgADAAIAAAAFAAsAAgAEAAEAAAAFAAwAAgAEAAIAAAAGAAsAAgAFAAEAAAAGAAwAAgAFAAIAAAAQAAsAAgADAAEAAAAQAAwAAgADAAIAAAARAAsAAgAEAAEAAAARAAwAAgAEAAIAAAASAAsAAgAFAAEAAAASAAwAAgAFAAIAAAAYAAsAAgADAAEAAAAYAAwAAgADAAIAAAAZAAsAAgAEAAEAAAAZAAwAAgAEAAIAAAAaAAsAAgAFAAEAAAAaAAwAAgAFAAIAAAAKAAsAAgADAAEAAAAKAAwAAgADAAIAAAALAAsAAgAEAAEAAAALAAwAAgAEAAIAAAAMAAsAAgAFAAEAAAAMAAwAAgAFAAIAAAAhAAsAAgADAAEAAAAhAAwAAgADAAIAAAAiAAsAAgAEAAEAAAAiAAwAAgAEAAIAAAAjAAsAAgAFAAEAAAAjAAwAAgAFAAIAAAA=")
+tile_set = ExtResource("1_anktc")
+
+[node name="TileMapLayer2" type="TileMapLayer" parent="terreno" unique_id=312941057]
+position = Vector2(0, 10)
+tile_map_data = PackedByteArray("AAAbAAoABQAOAAQAAAAbAAkABQAOAAQAAAAbAAgABQAOAAQAAAAbAAcABQAOAAMAAAAcAAcABQAPAAMAAAAdAAcABQAPAAMAAAAeAAcABQAQAAMAAAAfAAcABQAPAAMAAAAgAAcABQAPAAMAAAAhAAcABQASAAMAAAAhAAgABQASAAQAAAAeAAgABQAQAAQAAAAeAAkABQAQAAQAAAAeAAoABQAQAAQAAAAfAAoABQAQAAQAAAAYAAoABQADAAUAAAAXAAoABQADAAUAAAARAAgABQADAAUAAAAKAAgABQADAAUAAAAIAAoABQABAAUAAAAEAAoABQABAAUAAAAVAAoABQABAAUAAAAdAAoABQABAAUAAAALAAoABQADAAUAAAAGAAoABQADAAUAAAAEAAcABQABAAEAAAALAAcABQAFAAEAAAAMAAkABQAFAAEAAAAKAAkABQABAAEAAAANAAkABQABAAEAAAAPAAkABQAFAAEAAAATAAkABQAFAAEAAAAVAAkABQABAAEAAAA=")
+tile_set = ExtResource("12_8bbi1")
