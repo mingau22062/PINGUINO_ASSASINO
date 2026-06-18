@@ -26,6 +26,7 @@ limit_top = 0
 
 [node name="player" parent="." unique_id=1493939589 instance=ExtResource("2_y55rp")]
 position = Vector2(47, 61)
+scale = Vector2(1.2, 1.2)
 
 [node name="skeletron" parent="." unique_id=1058257826 instance=ExtResource("3_fe4xb")]
 position = Vector2(268, 120)

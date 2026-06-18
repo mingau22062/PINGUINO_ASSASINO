@@ -79,6 +79,7 @@ centered = false
 
 [node name="player" parent="." unique_id=1493939589 instance=ExtResource("8_xky86")]
 position = Vector2(89, 98)
+scale = Vector2(1.2, 1.2)
 
 [node name="Camera" parent="." unique_id=1268751885 instance=ExtResource("9_3kscr")]
 position = Vector2(2, -1)
