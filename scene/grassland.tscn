@@ -15,7 +15,7 @@
 size = Vector2(20, 219)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o0oqy"]
-size = Vector2(20, 311)
+size = Vector2(20, 113)
 
 [node name="grassland" type="Node2D" unique_id=2102055211]
 
@@ -95,6 +95,6 @@ position = Vector2(686, 82)
 next_level = "tropic"
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="LevelEnd" unique_id=234068769]
-position = Vector2(0, -42.5)
+position = Vector2(0, 46.5)
 shape = SubResource("RectangleShape2D_o0oqy")
 debug_color = Color(0.790948, 0.2857669, 0.8002555, 0.41960785)
